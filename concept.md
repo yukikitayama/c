@@ -1,0 +1,80 @@
+# Concept
+
+Advanced concept
+
+- Storage class
+  - auto
+  - register
+  - static
+  - extern
+- Advanced data type
+  - typedef
+  - variable length array
+  - flexible array number
+  - complex number types
+- Type qualifier
+  - const
+  - volatile
+  - restrict
+- Bit manipuation
+  - Binary numbers and bits
+  - Bitwise operators (logical and shifting)
+  - Bitmasks and bitfields
+- Advanced control flow
+  - goto
+  - null
+  - comma operator
+  - setjmp
+  - longjmp
+- Input and output
+  - getchar
+  - putchar
+  - fgets
+  - puts
+  - sprint
+  - fprintf
+  - fflush
+- Advanced function
+  - variadic function (variable number of argument)
+  - recursive function
+  - inline function
+- unions
+- Advanced preprocessor
+  - #define
+  - #pragma
+  - #error
+  - `#`
+  - `##`
+  - Conditional compilation (#ifdef)
+  - include guards
+- macro
+- Debugging and compiler flags
+  - gdb
+  - core files
+  - stack trace
+  - static analysis
+  - profiling
+- static library and shared objects
+  - dynamic loading
+- Pointers
+  - double pointers (pointers to pointers)
+  - function pointers
+  - void pointers
+- C libraries
+  - assert library
+  - stdlub.h
+  - date time
+- Data structure
+  - Linked list
+  - stack
+  - queue
+  - tree
+- Inter process communication (IPC)
+  - forking
+  - signal
+- Thread
+  - pthread
+  - mutexes
+  - semaphores
+- networking
+  - Socket

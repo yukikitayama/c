@@ -1,0 +1,4 @@
+# Escape sequence
+
+- `\a`
+  - Alert

@@ -1,0 +1,98 @@
+# Standard C library
+
+- `<stddef.h>`
+  - Standard definitions
+- `<limits.h>`
+  - Implementation-defined limits for character and integer data types
+- `<stdbool.h>`
+  - Definitions for working with Boolean variables
+  - **Should use**
+- `<string.h>`
+  - `strcat()`
+  - `strchr(s, c)` searches the string s for the first occurrence of the character c
+  - `strcmp()`
+  - `strcpy()`
+  - `size_t strlen(s)`
+  - `strncat()`
+  - `strncmp()`
+  - `strncpy()`
+  - `strrchr()`, not `n`, extra `r`
+  - `strstr()`
+  - `strtok()`
+- `<ctype.h>` for character functions
+  - `isalnum`, `isalpha`, ...
+  - `tolower(c)`
+  - `toupper(c)`
+- `<stdio.h>` for I/O functions
+  - `EOF`
+  - `NULL`
+  - `stdin`
+  - `stdout`
+  - `stderr`
+  - `FILE`
+  - `fclose()`
+  - `feof(filePtr)`
+  - `fflush(filePtr)` gets rid of everything inside buffer
+  - `fgets()`
+  - `fgetpos()`
+  - `fgets()`
+  - `fopen()`
+  - `fprintf()`
+  - `fputc()`
+  - `fputs()`
+  - `fscanf()`
+  - `fseek()`
+  - `fsetpos()`
+  - `ftell()`
+  - `printf()` useful for debugging
+  - `remove()`
+  - `rename()`
+  - `scanf()`
+- `<stdlib.h>`
+  - For functions to convert character strings to numbers
+    - `atof(s)` string to float
+    - `atoi()`
+    - `atol(s)`
+    - `atoll(s)`
+  - Dynamic memory allocation
+    - `calloc()`
+    - `free()`
+    - `malloc()`
+    - `realloc()`
+- `<math.h>`
+  - `ceil()` smallest integer greater than or equal to x
+  - `floor()`
+  - `round()`
+  - `abs()`
+  - `sqrt()`
+  - `pow()`
+  - `remainder()`
+  - `nan(s)`
+  - `log()`
+  - `sin()`
+  - `cos()`
+  - `tan()`
+  - `acosh()` hyperbolic arccosine
+  - `asin()`
+  - `atan()`
+- Utility functions in `<stdlib.h>`
+  - `exit()` terminates program execution.
+    - `EXIT_SUCCESS` and `EXIT_FAILURE` are defined in `<stdlib.h>`
+  - `char *getenv(s)` returns a pointer to the value of the environment variable pointed to by `s`.
+    - Used to get environment variables
+  - `void qsort(arr, n, size, comp_fn)` sorts array
+    - `arr` is the void pointer to array
+    - `n` number of elements
+    - `size` is type `size_t`, each size bytes
+    - `comp_fn` is a pointer to function that returns int and that takes two void pointers as arguments.
+  - `rand(void)` returns a random number in the range `[0, RAND_MAX]` where `RAND_MAX` is defined in `<stdlib.h>`.
+  - `void srand(seed)` seeds the random number generator to the `unsigned int` value `seed`
+  - `int system(s)` gives command and system calls like `mkdir`
+- `assert.h` assert library for debugging
+  - `assert()` takes an integer expression as its arguments. If the expression evaluates as false, it writes an error message to the `stderr` and calls `abort()` to terminate program.
+- `time.h` for dates and times
+- `errno.h` for reporting of errors
+- `locale.h` for formatting monetary units and currencies
+- `signal.h` for signals with conditions
+- `stdarg.h` enables a variable number of arguments for function
+  
