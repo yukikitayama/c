@@ -78,3 +78,48 @@ Break statement
 - Use `break;`
 - If the break statement is inside nested loops, it affects only the innermost loop.
 
+Goto statement
+- Bad reputation, hard to maintain
+- Causes the program to branch immediately to the statement that is preceded by the label
+- Label can be located anywhere in the function, before or after the goto
+- goto statements are not considered part of good programming style.
+- With deeply nested for loops, goto statement to exit from the entire nested for loops is useful.
+
+```
+goto someLabel;
+
+someLabel: printf("Hello");
+```
+
+Null statement
+- Null statement has the effect of doing nothing but exists for syntactical reasons
+- Without the null statement, whatever statement that follows for loop or while loop in the program is treated as the body of the program loop by the compiler.
+
+```
+for (count = 0; getchar() != EOF; ++count)
+    ;
+```
+
+Comma operator
+- Comma is a binary operator that evaluates its first operand and discards the results, then evaluates the second operand and returns this value.
+- The value of the comma operator is that of the rightmost expression
+- Often used with variable declaration and for loop variables. 
+```
+int i(5, 10);  // 10 is assigned to i
+int j = (f1(), f2());  // f2 output is assigned to j
+x = (y = 3, (z = ++y + 2) + 5);  // x will have 11 by 4 + 2 + 5
+```
+
+Setjmp and longjmp
+- `setjmp()` and `longjmp()` are functions that let you perform complex flow-of-control in C.
+- Mainly used to implement **exception handling** in C (**error recovery situations**).
+  - setjmp is like **try**
+  - longjmp is like **throw**.
+- Error handling makes sense only in the top level function if there is an error deep down in a function nested in many other functions
+- Use setjmp and longjmp for error handling so that you can jump out of deeply nested call chain without needing to deal with handling errors in every function in the chain.
+- `<setjmp.h>`
+- setjmp() is called first.
+- longjmp() goes back to setjmp place
+- Difference from goto
+  - jmp can jump from function to another function. longjmp only goes back to somewhere you have already been.
+  - goto only jump within the same function. goto can't jump out of the current function.

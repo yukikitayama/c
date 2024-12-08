@@ -43,8 +43,42 @@ int numbers[3][4] = {
 };
 ```
 
-Variable length array
+Variable length array (VLA)
 - It's just about making array with a size using a **variable**. It sounds like you can originally do it, but it's a new feature added by C99, and before C99, it's not allowed to do like `int nums[n]`.
 - Doesn't mean you can modify the length of the array after you create it. It keeps the same size after creation.
 - Specify the size of an array with a variable when creating an array.
 - Makes it easier to convert existing libraries of FORTRAN numerical calculation routines to C.
+- It's possible in C to create a variable length array **but not necessary and it's something recommended to avoid**.
+- If you need to dynamically allocate and even reallocate storage buffers, **you can always use pointers**.
+
+Flexible array member
+- Introduced in C99
+- When using **structure**, we can declare an array without a dimension and whose size is flexible in nature.
+- **Flexible array member** is declared by specifying **empty square brackets** `[]`.
+- **There is a programming pattern to define flexible array member**.
+- `malloc(sizeof(struct s) + desiredSize * sizeof(int));`
+  - `sizeof()` ignores the flexible array member. 
+  - `sizeof(struct)` evaluates size of all the members **except flexible array member**.
+  - The extra sizeof operator `desiredSize * sizeof(int)` allocates memory for the flexible array member.
+- Flexible array member can be declared only as **the last member of a struct**
+- Each struct can contain **at most one** flexible array member
+- Flexible array **cannot be the only member** of a struct
+- Any struct containing a flexible array member cannot be a member of another struct
+- A struct wiht a flexible array member **must be allocated dynamically**.
+- **It's debatable on whether it's a good practice to use flexible array members**
+  - Some argue it's not portable
+- Using flexible array member can use less memory and effort, save storage.
+
+```
+struct s {
+    int arraySize;
+    int array[];
+};
+
+int desiredSize = 5;
+struct s *ptr;
+
+ptr = malloc(sizeof(struct s) + desiredSize * sizeof(int));
+```
+
+

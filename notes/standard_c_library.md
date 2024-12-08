@@ -95,4 +95,3 @@
 - `locale.h` for formatting monetary units and currencies
 - `signal.h` for signals with conditions
 - `stdarg.h` enables a variable number of arguments for function
-  

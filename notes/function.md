@@ -65,3 +65,64 @@ Global variable
 - **In general, global variable is a bad thing, and should be avoided**.
 - Most modern OOP languanges (e.g., C++, Java) do not even have the concept of global variable. They have static variable and class variable instead.
 - Use parameters in functions instead. If a lot of data, use `struct`.
+
+Variadic function
+- Typically used when we don't know the total number of arguments that will be used for a function.
+- `stdarg.h` provides the routines to write variadic functions
+- `va_list` is an argument list, represents a data object to hold the parameters
+- `va_start(va_list, last_fixed_parameter)` connects argument list with argument pointer
+- `va_arg` fetches the current argument in argument list, you need to knwo the type.
+- `va_end` stops using variable argument list for cleanup.
+- Provide function prototype with **ellipsis (three dots)** `...`
+- There must be at least one fixed parameter
+- Must call `va_start()` to initialize the value of the variable argument list pointer in your function
+  - This pointer must be declared as type `va_list`.
+- There needs to be a mechanism to determine the type of each argument
+- You must have a way to determine when the list of arguments is exhausted.
+  - The last argument can work as a **sentinel value** to be detected
+  - Or the first argument could specify the count of the number of arguments in total
+- You must call `va_end()` before you exit a function with a variable number of arguments
+- `va_copy`
+  - It's possible to process a variable argument list more than once
+  - `va_copy` preserves a copy of the `va_list` type variable.
+  - Typically call `va_copy` early because, `va_copy()` copies the `va_list` object in whatever state it is in.
+
+Inline function
+- Normally, a function call has **overhead** when being invoked
+  - It takes execution time to set up the call, pass arguments, jump to the functions code, and return
+- Making a function `inline` is to **hint to the compiler** that it's worth making extra effort to call the function faster than it would otherwise.
+- Compiler will **substitute the code** of the function, so that the program no longer calls that function, the compiler **replaces** every call to an inline function with the code body of that function.
+- **The inline declaration is only advice to the compiler, which can decide to ignore it**.
+- Common misconception that in-lining always equals faster code
+  - In-lining can cause wastage of space, if many lines in inline function.
+  - Inline functions can increase the file size of the program.
+- **It's suggested to only declare functions as `inline` if they are short and called frequently**.
+- The inline function definition has to be in the same file as the function call.
+- Should always use the inline function specifier along with the `static` storage-class specifier.
+- Inline functions are usually defined before their first use in a file (definition also acts as a prototype)
+- **If you have a multi-file program, you need an inline definition in each file that calls the function**.
+  - **The simplest way is to put the inline function definition in a header file**.
+  - Include the header file in files that use the function.
+
+```
+inline static void foo()  // inline definition/prototype
+{
+    // do something
+}
+```
+
+_Noreturn function
+- C11 added it.
+- Informs the user and the compiler that a function will no return control to the calling program
+- Informs the user helps to prevent misuse of a function
+- Informs the compiler may enable it to make some code optimizations
+- `_Noreturn` function specifier is a **hint to the compiler**, so the compiler may not optimize the code.
+- `exit()` function is an example of a `_Noreturn` function.
+- `_Noreturn` is different from the `void` return type.
+- With `<stdnoreturn.h>`, you can use the convenience macro `noreturn` instead of `_Noreturn`.
+
+```
+_Noreturn void f() {
+    abort();
+}
+```

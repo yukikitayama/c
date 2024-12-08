@@ -181,3 +181,70 @@ Pointer arithmetic
 Pointer and string
 - One of the most common applications of using a pointer to an array is as a pointer to a character string.
 
+Double pointer (Pointer to a pointer)
+- When a pointer holds the address of another pointer, this is known as a pointer-to-pointer or double pointer.
+  - With a double pointer, the first pointer contains the address of the second pointer, which points to the location that contains the actual value.
+- `int **var;` declares a pointer to a pointer of type int.
+- `int x = **var;` dereference (accessing that value) requires that the asterisk operator be applied twice.
+
+Use case of double pointer
+- When you need to change the value of the pointer passed to a function as the function argument to simulate pass by reference
+  - If you pass a single pointer as an argument, you will be modifying local copies of the pointer (not the original pointer)
+  - With a pointer to a pointer, you modify the original pointer.
+- Use a double pointer as an argument to a function when you want to preserve the memory-allocation or assignment outside of the function.
+- Better to use a pointer to a 2 dimensional array, instead of using pointers of pointers to point to 2 dimensional arrays.
+- Allows to write a function that modifies a pointers value (not the value that the pointer is pointing to), the actual value of the pointer (the address that the pointer is pointng to)
+  - This simulates **pass by reference** in the C language.
+  - You want to change the value of the pointer passed to a function as the function argument.
+
+Function pointer
+- Functions contain address, so we can use a pointer to point to function
+- Not common use case
+- Pointers to function can be
+  - Passed to Functions
+  - Returned from functions
+  - Stored in arrays
+  - Assigned to other function pointers 
+- Function pointer can be used directly as the function name when calling the function
+- Use case
+  - A function pointer can be used as an argument to another function
+  - Sorting an array involves comparing two elements to see which comes first.
+  - Work as **Dispatch table**. Tables that contain pointers to functions to be called.
+    - A table for processing different commands that will be entered by a user.
+    - Each entry in the table contain both the command name and a pointer to a function to call to process that particular command.
+  - Menu-driven systems
+  - Replace switch/if-statements
+  - Late-binding
+  - Implement callbacks
+- A pointer to a function stores the address for the start of the function code
+  - Supplied with argument types and return type  
+  - A function pointer needs a defined prototype.
+- A pointer to a function is **dereferenced** to use the function.
+- `int (*pfunction)(int);` declares a function pointer, doesn't pointer to anything yet.
+  - The declaration is the de-referenced value of pfunction `(*pfunction)`.
+  - You can only use this particular pointer to point to functions with these parameter types and return type.
+```
+int lookup(int);
+pfunction = lookup; // or pfunction = &lookup;
+```
+- An ampersand is permitted in front of the function name, but it's not required.
+- Function needs to be declared or function prototype needs to be defined before assignment.
+- `int value = pfunction(5);` calls the function.
+  - No dereference operator is required.
+- Common convention
+  - Function pointers can be passed as parameters in function calls and can be returned as function values
+    - Use of function pointers as parameters makes for flexible functions and programs.
+  - Common to use `typedef` with complex types such as function pointers.
+    - `typedef` can hide the cumbersome syntax of function pointers.
+    - `typedef int (*funptr)();`
+    - `funcptr testvar;` makes declaring pointers much easier
+    - `unsigned ptrsize = sizeof(int (*funptr)());` gets the size of a function pointer
+    - `void signal(int (*funptr)());` used as a function parameter.
+
+Void pointer
+- Void type of pointer is a special type of pointer
+- Generic pointer by the absence of type
+- A void pointer can point to a variable of any data type
+- The data pointed to by a void pointer cannot be directly dereferenced
+  - Have to cast the address in the void pointer to some other pointer type that points to a concrete data type before dereferencing it.
+- `*(int *)vp` first `(int *)` type cast, then `*` to dereference it.
