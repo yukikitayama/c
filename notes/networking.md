@@ -156,6 +156,3 @@ Functions for socket
     - `1` Sending is not allowed
     - `2` Sending and receiving are not allowed. `2` means the same as `close()`
   - Returns 0 on success, -1 on error
-
-
-REVIEW FROM Challenge
