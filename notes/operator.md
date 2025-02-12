@@ -64,3 +64,9 @@ Ternary operator
 %zd specifier
 - `%zd` formats size of type
 
+## Operator precedence
+
+Higher
+- Addition `+`, subtraction `-`
+- Bitwise shifts `<<`, `>>`
+Lower

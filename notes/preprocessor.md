@@ -106,3 +106,17 @@ Debugging
   - When a preprocessor identifier `DEBUG` is defined, the debugging code is compiled
   - When `DEBUG` isn't defined, the debugging code is left out
 - Defining macro with body for debugging, and macro without body for non-debugging.
+
+Preprocessor operator
+- `##` is for concatenation, **token pasting operator**.
+
+```
+#define ALPHA(x, y) x##2-y
+
+int i = -1;
+int i2 = -2;
+
+ALPHA(i, i2) -> i##2-i2 -> i2-i2 -> -2--2 -> -2 + 2 -> 0
+```
+
+- `#` is **stringize operator** which converts a token into string, not value of a variable, but variable name itself.
