@@ -16,3 +16,8 @@ Operator precedence of addition `+`, subtraction `-` is higher than bitwise shif
 - `fscanf(stream, format, &variable)`
   - [C Library - fscanf() function](https://www.tutorialspoint.com/c_standard_library/c_function_fscanf.htm)
   - `fscanf(stream, %f, $var)` doesn't work if stream doesn't contain a decimal point, optionally with +/- or e/E.
+
+
+- `#` is **Stringize operator** to convert a token into string
+  - [# and ## Operators in C ?](https://www.tutorialspoint.com/hash-and-hashhash-operators-in-c)
+
