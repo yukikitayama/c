@@ -10,6 +10,9 @@ Operator precedence of addition `+`, subtraction `-` is higher than bitwise shif
 
 - [The difference in File access mode "w" and "wb](https://stackoverflow.com/questions/43777913/the-difference-in-file-access-mode-w-and-wb)
 
+- `fgets(*str, n, *stream)`
+  - Read `n - 1` character because of null character at the end.
+  - [C Library - fgets() function](https://www.tutorialspoint.com/c_standard_library/c_function_fgets.htm)
 - `fseek(f, 0, SEEK_END)`
   - [C Library - fseek() function](https://www.tutorialspoint.com/c_standard_library/c_function_fseek.htm)
 - [C Library - ftell() function](https://www.tutorialspoint.com/c_standard_library/c_function_ftell.htm)
@@ -21,3 +24,4 @@ Operator precedence of addition `+`, subtraction `-` is higher than bitwise shif
 - `#` is **Stringize operator** to convert a token into string
   - [# and ## Operators in C ?](https://www.tutorialspoint.com/hash-and-hashhash-operators-in-c)
 
+- Operator precedence of `++` `--` is higher than `*` dereference, 
