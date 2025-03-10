@@ -25,3 +25,18 @@ Operator precedence of addition `+`, subtraction `-` is higher than bitwise shif
   - [# and ## Operators in C ?](https://www.tutorialspoint.com/hash-and-hashhash-operators-in-c)
 
 - Operator precedence of `++` `--` is higher than `*` dereference, 
+
+- When a function definition says it returns some data type but when the function body doesn't a return statement, it actually compiles. But the program outputs an unpredictable value.
+
+```
+int f(void) {
+}
+
+int i;
+i = f();  // This can compile.
+```
+
+- `fprintf(stdin, string)` and `EOF`
+  - fprintf does not return EOF because its purpose is to write data, not read it. If fprintf encounters an error during writing, it will return -1, which is the same value as EOF.
+
+- `fprintf()` returns the number of characters written if successful.
