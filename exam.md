@@ -13,9 +13,15 @@ Operator precedence of addition `+`, subtraction `-` is higher than bitwise shif
 - `fgets(*str, n, *stream)`
   - Read `n - 1` character because of null character at the end.
   - [C Library - fgets() function](https://www.tutorialspoint.com/c_standard_library/c_function_fgets.htm)
-- `fseek(f, 0, SEEK_END)`
+- `fseek(FILE *stream, long int offset, int whence)`
+  - sets the file position of the stream to the given offset.
+  - `offset` is the number of bytes to move the file pointer.
+  - `whence` is the position from which the offset is added.
+  - Returns 0 on success, and non-zero on failure
   - [C Library - fseek() function](https://www.tutorialspoint.com/c_standard_library/c_function_fseek.htm)
-- [C Library - ftell() function](https://www.tutorialspoint.com/c_standard_library/c_function_ftell.htm)
+- `ftell(FILE *stream)`
+  - Returns the current file position as a long integer, and returns -1L on failure.
+  - [C Library - ftell() function](https://www.tutorialspoint.com/c_standard_library/c_function_ftell.htm)
 - `fscanf(stream, format, &variable)`
   - [C Library - fscanf() function](https://www.tutorialspoint.com/c_standard_library/c_function_fscanf.htm)
   - `fscanf(stream, %f, $var)` doesn't work if stream doesn't contain a decimal point, optionally with +/- or e/E.
@@ -40,3 +46,5 @@ i = f();  // This can compile.
   - fprintf does not return EOF because its purpose is to write data, not read it. If fprintf encounters an error during writing, it will return -1, which is the same value as EOF.
 
 - `fprintf()` returns the number of characters written if successful.
+
+- `fputs(*str, *stream)` returns a non-negative value if success, or returns EOF (-1) if error.
