@@ -69,10 +69,82 @@ void challenge2()
     printf("%f\n", average);
 }
 
+void inputArray(int* arr, int size)
+{
+    int i;
+    for (i = 0; i < size; i++)
+    {
+        printf("Enter value #%d: ", i + 1);
+        scanf("%d", &arr[i]);
+    }
+}
+
+void displayArray(int *arr, int size)
+{
+    int i;
+    for (i = 0; i < size; i++)
+    {
+        printf("Value #%d: %d\n", i + 1, arr[i]);
+    }
+}
+
+void test2()
+{
+    int grades[SIZE];
+    inputArray(grades, SIZE);
+    displayArray(grades, SIZE);
+}
+
+void minMax(int *pArr, int size, int *minValue, int *maxValue)
+{
+    int i;
+    *minValue = pArr[0];
+    *maxValue = pArr[0];
+    for (i = 1; i < size; i++)
+    {
+        if (pArr[i] < *minValue)
+            *minValue = pArr[i];
+        if (pArr[i] > *maxValue)
+            *maxValue = pArr[i];
+    }
+}
+
+void challenge3()
+{
+    int myGrades[] = {80, 90, 100};
+    int min, max;
+    minMax(myGrades, 3, &min, &max);
+
+    printf("The max value in your grades: %d\n", max);
+    printf("The min value in your grades: %d\n", min);
+}
+
+void updateAverage(int num1, int num2, float *average)
+{
+    
+}
+
+void challenge3_1()
+{
+    int a, b;
+    float average;
+    printf("Enter the value for variable 'a': ");
+    scanf("%d", &a);
+    printf("Enter the value for variable 'b': ");
+    scanf("%d", &b);
+
+    updateAverage();
+
+    printf();
+}
+
 int main()
 {
     // test();
     // challenge1();
-    challenge2();
+    // challenge2();
+    // test2();
+    // challenge3();
+    challenge3_1();
     return 0;
 }
