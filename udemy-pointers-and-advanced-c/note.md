@@ -67,4 +67,10 @@ Multiple indirection
 - Require an explicit type casting to use it
 - `printf("%d", *(int*)ptr);`, `(int*)` is an explicit casting to universal void pointer
   - From that address, instruct how many bytes they should read.
-- 
+
+# Section 5: Arrays and pointers
+
+Array
+- Array variable is an address of the first element
+- Function can receive array as array and pointer
+- `func(int arr[])` and `func(int *ptr)` both are okay
