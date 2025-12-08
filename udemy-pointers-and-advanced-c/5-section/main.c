@@ -121,7 +121,7 @@ void challenge3()
 
 void updateAverage(int num1, int num2, float *average)
 {
-    
+    *average = (num1 + num2) / 2.0;
 }
 
 void challenge3_1()
@@ -133,9 +133,129 @@ void challenge3_1()
     printf("Enter the value for variable 'b': ");
     scanf("%d", &b);
 
-    updateAverage();
+    updateAverage(a, b, &average);
 
-    printf();
+    printf("%f\n", average);
+}
+
+int hasNeighbors(int *arr, int size)
+{
+    int i;
+    for (i = 1; i < size - 1; i++)
+    {
+        if (arr[i] == arr[i - 1] + arr[i + 1])
+            return 1;
+    }
+    return 0;
+}
+
+void challenge4()
+{
+    int nums1[] = {1, 4, 7, 3, 2};
+    int nums2[] = {1, 4, 1, 4, 2};
+    printf("%d\n", hasNeighbors(nums1, 5));
+    printf("%d\n", hasNeighbors(nums2, 5));
+}
+
+int checkIsSorted(int *arr, int size, int *isReallySorted)
+{
+    int i;
+    *isReallySorted = 1;
+    for (i = 1; i < size; i++)
+    {
+        if (arr[i] <= arr[i - 1])
+            *isReallySorted = 0;
+        if (arr[i] < arr[i - 1])
+            return 0;
+    }
+    return 1;
+}
+
+int checkIsSortedRecursive(int *arr, int size, int *isReallySorted)
+{
+    int result;
+    if (size == 1)
+    {
+        *isReallySorted = 1;
+        return 1;
+    }
+    result = checkIsSortedRecursive(arr, size - 1, isReallySorted);
+    if (result != 0 && arr[size - 1] == arr[size - 2])
+    {
+        *isReallySorted = 0;
+    }
+    if (result != 0 && arr[size - 1] < arr[size - 2])
+    {
+        *isReallySorted = 0;
+        return 0;
+    }
+    return result;
+}
+
+void challenge5()
+{
+    // int valuesArr[] = {1, 2, 5, 7, 10};
+    // int valuesArr[] = {1, 2, 2, 5, 10};
+    int valuesArr[] = {1, 2, 5, 3, 10};
+    int isReallySortedFlag;
+    int result;
+
+    result = checkIsSorted(valuesArr, 5, &isReallySortedFlag);
+
+    printf("%d, %d\n", result, isReallySortedFlag);
+
+    if (result == 1)
+        printf("The array is Really sorted or sorted\n");
+    else if (result == 0) 
+        printf("The array is not sorted at all\n");
+    
+    if (isReallySortedFlag == 1)
+        printf("The array is Really sorted\n");
+    else if (isReallySortedFlag == 0)
+        printf("The array is Not Really sorted\n");
+}
+
+void swap(char *ptr1, char *ptr2)
+{
+    char temp;
+    temp = *ptr1;
+    *ptr1 = *ptr2;
+    *ptr2 = temp;
+}
+
+void printArray(char* arr, int size)
+{
+    int i;
+    for (i = 0; i < size; i++)
+    {
+        printf("%c ", arr[i]);
+    }
+    printf("\n");
+}
+
+void reverseArrIterative(char* arr, int size)
+{
+    int i;
+    for (i = 0; i < size / 2; i++)
+        swap(&arr[i], &arr[size - 1 - i]);
+}
+
+void reverseArrRecursive(char* arr, int size)
+{
+    if (size > 1)
+    {
+        swap(&arr[0], &arr[size - 1]);
+        reverseArrRecursive(arr + 1, size - 2);
+    }
+    
+}
+
+void challenge6()
+{
+    char arr[SIZE] = {'a', 'f', 'k', 'd'};
+    printArray(arr, SIZE);
+    reverseArrRecursive(arr, SIZE);
+    printArray(arr, SIZE);
 }
 
 int main()
@@ -145,6 +265,9 @@ int main()
     // challenge2();
     // test2();
     // challenge3();
-    challenge3_1();
+    // challenge3_1();
+    // challenge4();
+    // challenge5();
+    challenge6();
     return 0;
 }
