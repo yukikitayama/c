@@ -258,6 +258,167 @@ void challenge6()
     printArray(arr, SIZE);
 }
 
+void printValuesFrequency(int *arr, int size)
+{
+    int i, j;
+    int leftFlag;
+    int countValue;
+
+    for (i = 0; i < size; i++)
+    {
+        countValue = 1;
+        leftFlag = 0;
+        
+        // Left part
+        for (j = 0; j < i; j++)
+        {
+            if (arr[j] == arr[i])
+            {
+                leftFlag = 1;
+                break;
+            }
+        }
+
+        if (leftFlag == 1)
+        {
+            continue;
+        }
+
+        // Right part
+        for (j = i + 1; j < size; j++)
+        {
+            if (arr[j] == arr[i])
+                countValue++;
+        }
+
+        // Print
+        printf("%d appears %d times\n", arr[i], countValue);
+    }
+}
+
+void challenge7()
+{
+    int arr[] = {5, 6, 7, 6, 5};
+    printValuesFrequency(arr, 5);
+}
+
+int findSecondSmallest(int *arr, int size)
+{
+    int i;
+    int min1 = arr[0];
+    int min2 = arr[0];
+    for (i = 1; i < size; i++)
+    {
+        if (arr[i] < min1)
+        {
+            min2 = min1;
+            min1 = arr[i];
+        }
+        else if (arr[i] < min2)
+        {
+            min2 = arr[i];
+        }
+    }
+    return min2;
+}
+
+void challenge8()
+{
+    int arr1[] = {5, 8, 7, 4, 9};
+    int min1 = findSecondSmallest(arr1, 5);
+    printf("%d\n", min1);
+}
+
+int findIf2ElementsSum(int *arr, int size, int value, int *iPtr, int *jPtr)
+{
+    int i, j;
+    for (i = 0; i < size; i++)
+    {
+        for (j = i + 1; j < size; j++)
+        {
+            if (arr[i] + arr[j] == value)
+            {
+                *iPtr = i;
+                *jPtr = j;
+                return 1;
+            }
+        }
+    }
+    *iPtr = 0;
+    *jPtr = 0;
+    return 0;
+}
+
+int findIf2ElementsSumOptimized(int *arr, int size, int value, int *iPtr, int *jPtr)
+{
+    int i, j;
+    int currentSum;
+    i = 0;
+    j = size - 1;
+    while (i < j)
+    {
+        currentSum = arr[i] + arr[j];
+        if (currentSum == value)
+        {
+            *iPtr = i;
+            *jPtr = j;
+            return 1;
+        }
+        else if (currentSum < value)
+        {
+            i++;
+        }
+        else
+        {
+            j--;
+        }
+    }
+    *iPtr = 0;
+    *jPtr = 0;
+    return 0;
+}
+
+void challenge9()
+{
+    int arr[] = {1, 3, 4, 7, 9, 10, 12};
+    int i, j;
+    int result;
+    result = findIf2ElementsSum(arr, 7, 13, &i, &j);
+    printf("%d, %d, %d\n", result, i, j);
+    result = findIf2ElementsSumOptimized(arr, 7, 14, &i, &j);
+    printf("%d, %d, %d\n", result, i, j);
+}
+
+int *createArray()
+{
+    int i;
+    int myArr[SIZE];
+    printf("Enter %d elements to your array.\n", SIZE);
+    for (i = 0; i < SIZE; i++)
+    {
+        printf("Enter number %d: ", i);
+        scanf("%d", &myArr[i]);
+    }
+    return myArr;
+}
+
+void printArr(int *arr, int size)
+{
+    int i;
+    for (i = 0; i < SIZE; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+void attention()
+{
+    int *arr;
+    arr = createArray();
+    printArr(arr, SIZE);
+}
+
 int main()
 {
     // test();
@@ -268,6 +429,10 @@ int main()
     // challenge3_1();
     // challenge4();
     // challenge5();
-    challenge6();
+    // challenge6();
+    // challenge7();
+    // challenge8();
+    // challenge9();
+    attention();
     return 0;
 }

@@ -74,3 +74,71 @@ Array
 - Array variable is an address of the first element
 - Function can receive array as array and pointer
 - `func(int arr[])` and `func(int *ptr)` both are okay
+
+# Section 7: Dynamic memory allocation
+
+Pointers motivation
+- Passing by pointer
+- "Returning" more than just one thing from a function
+- Passing arrays and strings to functions
+- Allocating unknown memory at run time
+
+Dynamic memory allocation
+- Functions to allocate memory
+  - `malloc`, `calloc`
+- `malloc` function
+  - Allocates a sequence of bytes
+  - Returns the address of the sequence (the address of the first byte)
+  - Can work with allocated sequence.
+  - Definition is `void * malloc(unsigned size)`, so we need to cast.
+    - Casting allows us to tell how to treat the sequence of bytes. 
+- **To use `malloc` / `calloc` functions, include `malloc.h` or `stdlib.h`**.
+
+calloc
+- Allocates a sequence of bytes
+- Returns the address of the first byte of the sequence
+- Can work with allocated sequence after allocation
+- **All elements are set to 0**
+- `void * calloc(unsigned num, unsigned size)`
+  - The first is number of elements
+  - The second is size of each element. (Not sizeof * number of elements)
+- e.g., `(int *)calloc(5, sizeof(int))`
+
+free function
+- Whenever you are making a dynamic memory allocation inside some function for some object, it will ramain in memory even after finishing with the function
+- That memory will be consumed until the program ends, even if it will take very long time for that to happen
+  - It's opposed to how static arrays free their memory once a given function is over.
+- There is no infinite memory in computer, so there is no need for holding memory which has no usage.
+- Free functions free the memory that was dynamically allocated.
+- Considerations for using the free function
+  - Dynamic allocation inside a function
+  - Repeatable memory allocation inside a loop
+    - e.g., when every iteration does dynamic memory allocation
+- 5 common errors with using free function
+  1 Use free function to statis array (e.g., int a[10])
+  2 Use it to a uninitialized pointer to some data type
+  3 Free twice to the the same thing
+  4 Try to free a part of the sequence
+  5 Understand the previous 4 things
+
+Dangling pointer
+- `free` function frees the real memory that a pointer points to, but the pointer still contains the address.
+- The program is no longer allowed to access the memory, but the pointer still contains the address.
+- The pointer in this situation is called **dangling pointer**
+- So it's a good practice to manually set `a = NULL;` after using `free` function. 
+
+Valgrind
+- Finds memory leakages
+
+realloc function
+- Resize the block of memory that was previously allocated
+  - e.g., we need to have a longer array than the previous
+- `void * realloc(void *ptr, size_t size)`
+  - The first argument is the address of the already allocated memory
+  - The second argument is the new size
+- Allocates a new sequence of elements in your computer's memory
+- Gives us a copy of previous elements
+- Issues with realloc
+  - Overwriting the actual pointer
+    - When copy fails, we lose the address to the previous memory.
+  - Different implementations
