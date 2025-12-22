@@ -205,6 +205,43 @@ void test_adjustable_reallocation()
     printf("Array size: %d", arrSize);
 }
 
+void create1DArrayByRef(int arrSize, int** p)
+{
+    int i;
+    int* newArr;
+    newArr = (int*)malloc(arrSize * sizeof(int));
+    for (i = 0; i < arrSize; i++)
+    {
+        printf("Enter value: ");
+        scanf("%d", &newArr[i]);
+    }
+    *p = newArr;
+}
+
+void create1DArrayByRef2(int arrSize, int** p)
+{
+    int i;
+    *p = (int*)malloc(arrSize * sizeof(int));
+    for (i = 0; i < arrSize; i++)
+    {
+        printf("Enter value: ");
+        scanf("%d", &(*p)[i]);
+    }
+}
+
+void test_pointer_to_pointer()
+{
+    int size;
+    int* ptr;
+    printf("Enter the desired size of the array: ");
+    scanf("%d", &size);
+
+    // create1DArrayByRef(size, &ptr);
+    create1DArrayByRef2(size, &ptr);
+
+    printArray2(ptr, size);
+}
+
 int main()
 {
     // test1();
@@ -212,6 +249,7 @@ int main()
     // challenge2();
     // test_realloc();
     // test_universal_realloc_function();
-    test_adjustable_reallocation();
+    // test_adjustable_reallocation();
+    test_pointer_to_pointer();
     return 0;
 }
