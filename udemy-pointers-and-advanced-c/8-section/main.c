@@ -120,10 +120,50 @@ void advanced()
     printArray(newArr, 4);
 }
 
+void* remove2(void* arr, unsigned size, unsigned idx, unsigned sourceSize)
+{
+    void* newArr = malloc(size - sourceSize);
+    if (!newArr) return NULL;
+    memcpy(newArr, arr, idx);
+    memcpy((char*)newArr + idx, (char*)arr + idx + sourceSize, size - idx - sourceSize);
+    return newArr;
+}
+
+void advanced2()
+{
+    int arr[] = {1, 2, 3};
+    printArray(arr, 3);
+    int* newArr = (int*)remove2(arr, sizeof(int) * 3, sizeof(int) * 1, sizeof(int));
+    printArray(newArr, 2);
+}
+
+void allocateAndCopyArray(int* original, int sizeOriginal, int** target)
+{
+    int i;
+    *target = (int*)malloc(sizeOriginal * sizeof(int));
+    if (*target != NULL)
+    {
+        for (i = 0; i < sizeOriginal; i++)
+        {
+            (*target)[i] = original[i];
+        }
+    }
+}
+
+void test_copy_by_reference()
+{
+    int arrOriginal[3] = {1,5,4};
+    int* copiedArr;
+    allocateAndCopyArray(arrOriginal, 3, &copiedArr);
+    printArray(copiedArr, 3);
+}
+
 int main()
 {
     // exercise1();
     // exercise2();
-    advanced();
+    // advanced();
+    // advanced2();
+    test_copy_by_reference();
     return 0;
 }
